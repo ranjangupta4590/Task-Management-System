@@ -1,23 +1,32 @@
-import logo from './logo.svg';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import './App.css';
+import AddTask from './components/AddTask';
+import TaskList from './components/TaskList';
+import EditTask from './components/EditTask';
 
 function App() {
+  const location = useLocation();
+  const previousLocation = location.state?.previousLocation;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='' >
+      
+      
+      <div className='w-full border-b-2 shadow-md text-center text-2xl text-white py-5'>
+        <span>Task Management System</span>
+      </div>
+
+      <div className='mx-10'>
+
+        {/* <TaskList/> */}
+        <Routes location={previousLocation || location}>
+          <Route path="/" exact element={<TaskList />} />
+          <Route path="/tasklist" exact element={<TaskList />} />
+          <Route path="/addtask" element={<AddTask />} />
+          <Route path="/edit/:id" element={<EditTask />} />
+        </Routes>
+      </div>
+
     </div>
   );
 }
